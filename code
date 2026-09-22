@@ -1,0 +1,88 @@
+def add(x, y):
+    """Возвращает сумму двух чисел."""
+    return x + y
+
+def subtract(x, y):
+    """Возвращает разность двух чисел."""
+    return x - y
+
+def multiply(x, y):
+    """Возвращает произведение двух чисел."""
+    return x * y
+
+def divide(x, y):
+    """Возвращает частное двух чисел или ошибку при делении на ноль."""
+    if y == 0:
+        return None
+    return x / y
+
+def get_numbers():
+    """Запрашивает у пользователя два числа с защитой от некорректного ввода."""
+    while True:
+        try:
+            num1 = float(input("Введите первое число: "))
+            num2 = float(input("Введите второе число: "))
+            return num1, num2
+        except ValueError:
+            print("Ошибка! Вводите только цифры. Попробуйте еще раз.\n")
+
+print("=" * 30)
+print("   Простой консольный калькулятор")
+print("=" * 30)
+
+while True:
+    # Главное меню операций
+    print("\nВыберите операцию:")
+    print("1. Сложение (+)")
+    print("2. Вычитание (-)")
+    print("3. Умножение (*)")
+    print("4. Деление (/)")
+    print("5. История вычислений")
+    print("6. Выход")
+
+    choice = input("Ваш выбор (1-6): ")
+
+    if choice == '5':
+        # Блок отображения истории
+        if not history:
+            print("\nИстория пока пуста.")
+        else:
+            print("\n--- История вычислений ---")
+            for record in history:
+                print(record)
+        continue
+    elif choice == '6':
+        print("\nДо свидания!")
+        break
+    elif choice not in ['1', '2', '3', '4']:
+        print("Неверный выбор. Пожалуйста, введите число от 1 до 6.")
+        continue
+
+    # Запрос чисел
+    num1, num2 = get_numbers()
+    
+    result_str = ""
+
+    # Выполнение выбранной операции
+    if choice == '1':
+        result = add(num1, num2)
+        op_symbol = '+'
+    elif choice == '2':
+        result = subtract(num1, num2)
+        op_symbol = '-'
+    elif choice == '3':
+        result = multiply(num1, num2)
+        op_symbol = '*'
+    elif choice == '4':
+        result = divide(num1, num2)
+        op_symbol = '/'
+        if result is None:
+            result_str = f"Ошибка: {num1} / {num2} — деление на ноль!"
+
+    # Формирование и вывод результата
+    if not result_str and choice != '4' or (choice == '4' and result is not None):
+        result_str = f"{num1} {op_symbol} {num2} = {result}"
+        # Сохраняем успешное действие в историю
+        history.append(result_str)
+        
+    print(f"\nРезультат: {result_str}")
