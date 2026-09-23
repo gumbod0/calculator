@@ -1,5 +1,5 @@
 def add(x, y):
-    """Возвращает сумму двух чисел."""
+    """Возвращает сумму двух чисел.""
     return x + y
 
 def subtract(x, y):
@@ -86,3 +86,4 @@ while True:
         history.append(result_str)
         
     print(f"\nРезультат: {result_str}")
+***
