@@ -79,7 +79,7 @@ while True:
         if result is None:
             result_str = f"Ошибка: {num1} / {num2} — деление на ноль!"
 
-    # Формирование и вывод результата
+    # Формирование и ВЫВОД результата
     if not result_str and choice != '4' or (choice == '4' and result is not None):
         result_str = f"{num1} {op_symbol} {num2} = {result}"
         # Сохраняем успешное действие в историю
